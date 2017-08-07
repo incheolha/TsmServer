@@ -484,7 +484,7 @@ boardProto.deleteMyBoard;
    updateProfile:userProto.updateProfile,getPhoto:userProto.getPhoto, deleteAccount:userProto.deleteAccount,getUsers:userProto.getUsers,getFriendList:userProto.getFriendList,addFriend:userProto.addFriend,
    deleteFriend:userProto.deleteFriend,blockUser:userProto.blockUser,getBlockedUser:userProto.getBlockedUser,getPerson:userProto.getPerson,releaseBlockedFriend:userProto.releaseBlockedFriend,startConversation:conversationProto.startConversation,getMessages:conversationProto.getMessages,
    getConversations:conversationProto.getConversations,sendTextMessage:conversationProto.sendTextMessage,sendPhotoMessage:conversationProto.sendPhotoMessage,
-   deleteConversation:conversationProto.deleteConversation,getBoards:boardProto.getBoards,createMyBoard:boardProto.createMyBoard,deleteMyBoard:boardProto.deleteMyBoard,createReport:createReport});
+   deleteConversation:conversationProto.deleteConversation,getBoards:boardProto.getBoards,createMyBoard:boardProto.createMyBoard,deleteMyBoard:boardProto.deleteMyBoard,createReport:conversationProto.createReport});
    server.bind('0.0.0.0:9003', grpc.ServerCredentials.createInsecure());
    server.start();
    console.log('GRPC server running on port:', '0.0.0.0:9003');
