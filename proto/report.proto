@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+
+message ReportRequest{
+    int64 user_id = 1;
+    int64 participant_id = 2;
+    string reason = 3;
+}
+
+message ReportResponse{
+
+}

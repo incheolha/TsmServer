@@ -1,0 +1,112 @@
+syntax = "proto3";
+
+
+//그 대화방의 message 를 가져오는 rpc도 필요 할거 같음
+message Message{
+  int64 message_id = 1;
+  int64 conversation_id = 2;
+  int64 sender_id = 3;
+  int64 receiver_id = 4;
+  string message = 5;
+  string attachment_url = 6;
+  string created = 7;
+  string type = 8;
+  //senderDisplayName 넣어줄려면 user_id로 필요할거 같음
+  //attachment_url should not be null when it goes to client from server.
+  //created should not be string. should be Timestamp in here or DB should be varchar
+}
+
+//getConversations return값 수정
+
+message Conversation{
+  int64 conversation_id = 1;
+  int64 user_id = 2;
+  string sex = 3;
+  int64 age = 4;
+  string country = 5;
+  string nickname = 6;
+  string status_message = 7;
+  int64 status = 8;
+  string image_url = 9;
+  //conversation's created
+  string created = 10;
+  string last_logged = 11;
+  double distance = 12;
+}
+
+message GetMessagesRequest{
+  int64 conversation_id = 1;
+  //for 100개씩
+  int64 message_id = 2;
+}
+
+message GetMessagesResponse{
+  repeated Message messages = 1;
+}
+
+message StartConversationRequest {
+    int64 my_id = 1;
+    int64 counter_id = 2;
+    string content = 3;
+    double latitude = 4;
+    double longitude = 5;
+
+}
+
+message StartConversationResponse {
+  int64 c_id = 1;
+  int64 sender_id = 2;
+  int64 receiver_id = 3;
+  string message = 4;
+  //ConversationResponse conversation_res = 5;
+  //ConversationResponse myInfo = 6;
+}
+
+message ConversationsRequest{
+    int64 my_id = 1;
+    double latitude = 2;
+    double longitude = 3;
+}
+
+message ConversationsResponse{
+    repeated Conversation conversations = 1;
+}
+
+message SendTextMessageRequest {
+  int64 conversation_id = 1;
+  string content = 2;
+  int64 my_id = 3;
+  int64 receiver_id = 4;
+}
+
+//for message DB Check
+message Request{
+  //for null request
+  int64 conversation_id = 1;
+}
+//for message DB Check
+message SendTextMessageResponse {
+  int64 conversation_id = 1;
+  string content = 2;
+  int64 my_id = 3;
+  int64 last_inserted_id = 4;
+}
+
+message SendPhotoMessageRequest {
+  int64 conversation_id = 1;
+  string image_url = 2;
+  int64 my_id =3 ;
+  int64 receiver_id = 4;
+}
+
+message SentMessageResponse {
+  Message message = 1;
+}
+
+message DeleteConversationRequest {
+    int64 conversation_id =1 ;
+}
+
+message DeleteConversationResponse {
+
+}

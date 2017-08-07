@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+
+message Board{
+
+    int64 board_id = 1;
+    int64 user_id = 2;
+    string content = 3;
+    string image_url = 4;
+    string created = 5;
+    string sex = 6;
+    int64 age = 7;
+    string nickname = 8;
+    //distance between two users
+    double distance = 9;
+
+}
+
+message BoardsRequest{
+    //100개씩 가져올때 필요
+    int64 board_id = 1;
+    //calculate from myself location
+    double latitude = 2;
+    double longitude = 3;
+    //indicator
+    string indicator = 4;
+}
+
+message BoardsResponse{
+    repeated Board boards = 1;
+}
+
+message CreateBoardRequest{
+    int64 user_id = 1;
+    string content = 2;
+    string image_url = 3;
+}
+
+message CreateBoardResponse{
+
+}
+
+message DeleteMyBoardRequest{
+    int64 user_id = 1;
+}
+
+message DeleteMyBoardResponse{
+
+}

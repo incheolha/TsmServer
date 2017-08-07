@@ -1,0 +1,242 @@
+syntax = "proto3";
+
+message User {
+    //DB column data type이랑 proto data type랑 무조건 같아야함
+    int64 number_id = 1;
+    int64 user_id = 2;
+    string sex = 3;
+    int64 age = 4;
+    string country = 5;
+    string nickname = 6;
+    string status_message = 7;
+    int64 status = 8;
+    double latitude = 9;
+    double longitude = 10;
+    string image_url = 11;
+    string created = 12;
+    string last_logged = 13;
+    double distance = 14;
+}
+
+message Friend {
+    int64 user_id = 1;
+    string sex = 2;
+    int64 age = 3;
+    string country = 4;
+    string nickname = 5;
+    string status_message = 6;
+    int64 status = 7;
+    double latitude = 8;
+    double longitude = 9;
+    string image_url = 10;
+    string created = 11;
+    string last_logged = 12;
+}
+
+
+message Device {
+  enum OS {
+    ANDROID = 0;
+    IOS = 1;
+  }
+  string device_code = 1;
+  string device_name = 2;
+  OS os = 3;
+  string sdk_version = 4;
+  string app_version = 5;
+  string device_token = 6;
+}
+//없애자
+message Location {
+  double latitude = 1;
+  double longitude = 2;
+}
+
+message GetPerson{
+  int64 user_id = 1;
+  string sex = 2;
+  int64 age = 3;
+  string country = 4;
+  string nickname = 5;
+  string status_message = 6;
+  int64 status = 7;
+  double latitude = 8;
+  double longitude = 9;
+  string image_url = 10;
+  string created = 11;
+  string last_logged = 12;
+  double distance = 13;
+}
+
+message GetPersonRequest{
+  int64 user_id = 1;
+  double latitude = 2;
+  double longitude = 3;
+}
+
+message GetPersonResponse{
+  GetPerson user = 1;
+}
+
+message CaptchaRequest {
+
+}
+
+message CaptchaResponse {
+    string key = 1;
+    bytes captcha = 2;
+    int32 timeout = 3;
+}
+
+//profile 사진 저장
+message ProfilePhotoRequest{
+  bytes photo = 1;
+  string filename = 2;
+}
+
+//게시판 사진 보여주기
+message GetPhotoRequest{
+  string filename = 1;
+}
+
+message GetPhotoResponse{
+  bytes photo = 1;
+}
+
+
+message ProfileRequest {
+    //처음 가입할때는 클라에서 User의 id를 할당 못해줌
+    //User user = 1
+    string sex = 1;
+    int64 age = 2;
+    int64 status = 3;
+    string country = 4;
+    string nickname = 5;
+    string status_message = 6;
+    double longitude = 7;
+    double latitude = 8;
+    string image_url = 9;
+    Device device = 10;
+}
+
+message ProfileResponse {
+    //승진아 어차피 이거는 클라이언트에서 입력하고 가입하기?버튼 누르면 그때 device local에 저장해주면 되는거 아니냐?
+    //user_id만 리턴해주면 될거 같은데..?
+    //User user = 1;
+    int64 user_id = 1;
+}
+
+
+message AuthRequest {
+  int64 user_id = 1;
+}
+
+message AuthResponse {
+  string userExist = 1;
+}
+
+message UpdateStatusRequest{
+    int64 user_id = 1;
+    int64 value = 2;
+}
+
+message UpdateLocationRequest{
+  int64 user_id = 1;
+  double latitude = 2;
+  double longitude = 3;
+}
+
+message PointRequest {
+    int32 user_id = 1;
+}
+
+message PointResponse {
+    int32 point = 1;
+}
+
+message UpdateProfileRequest {
+
+  int64 user_id = 1;
+  string sex = 2;
+  int64 age = 3;
+  string country = 4;
+  string nickname = 5;
+  string status_message = 6;
+  string image_url = 7;
+
+}
+
+message UpdateProfileResponse{
+
+}
+
+message DeleteAccountRequest {
+    int32 user_id = 1;
+}
+
+message DeleteAccountResponse {
+
+}
+
+//Men and women nearby + latest men and female
+//이것만 있으면 최근남자, 여자, 근처남자, 여자 다 커버 가능
+message GetUserRequest{
+  double latitude = 1;
+  double longitude = 2;
+  string indicator = 3;
+  int64 number_id = 4;
+}
+
+message GetUserResponse{
+  repeated User users = 1;
+}
+
+
+message FriendListRequest{
+    int64 user_id = 1;
+}
+
+message FriendListResponse{
+    repeated Friend friends = 1;
+}
+
+message AddFriendRequest{
+    int64 my_id = 1;
+    int64 friend_id = 2;
+}
+
+message AddFriendResponse{
+
+}
+
+message DeleteFriendRequest{
+    int64 my_id = 1;
+    int64 friend_id = 2;
+}
+
+message DeleteFriendResponse{
+
+}
+
+message ReleaseBlockedFriendRequest{
+    int64 my_id = 1;
+    int64 blocked_friend_id = 2;
+}
+
+message BlockUserRequest{
+    int64 my_id = 1;
+    int64 blocked_user_id = 2;
+    string indicator = 3;
+}
+
+message BlockUserResponse{
+  string result = 1;
+}
+
+message BlockedUserListRequest{
+    int64 my_id =1;
+}
+
+message BlockedUserListResponse{
+    repeated Friend blockedFriends =1;
+}

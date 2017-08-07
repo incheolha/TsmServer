@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package main;
+
+import "board.proto";
+import "conversation.proto";
+import "report.proto";
+import "user.proto";
+import "common.proto";
+
+service Main {
+    rpc GetCaptcha(CaptchaRequest) returns (CaptchaResponse){}
+    rpc SendProfilePhoto(ProfilePhotoRequest) returns (Response) {}
+    rpc SetUpProfile(ProfileRequest) returns (ProfileResponse){}
+}
+
+service AuthorizedMain{
+    //User
+    rpc Auth(AuthRequest) returns (AuthResponse){}
+    rpc UpdateStatus(UpdateStatusRequest) returns (Response){}
+    rpc UpdateLocation(UpdateLocationRequest) returns (Response){}
+    rpc GetPoint(PointRequest) returns (PointResponse){}
+    rpc UpdateProfile(UpdateProfileRequest) returns (Response){}
+    rpc DeleteAccount(DeleteAccountRequest) returns (Response){}
+    rpc GetUsers(GetUserRequest) returns (GetUserResponse) {}
+    rpc GetFriendList(FriendListRequest) returns (FriendListResponse){}
+    rpc AddFriend(AddFriendRequest) returns (AddFriendResponse){}
+    rpc DeleteFriend(DeleteFriendRequest) returns (DeleteFriendResponse){}
+    rpc BlockUser(BlockUserRequest) returns (BlockUserResponse){}
+    rpc GetBlockedUser(BlockedUserListRequest) returns (BlockedUserListResponse){}
+    rpc GetPerson(GetPersonRequest) returns (GetPersonResponse){}
+    rpc ReleaseBlockedFriend(ReleaseBlockedFriendRequest) returns (Response){}
+    //Common
+    rpc GetPhoto(GetPhotoRequest) returns (GetPhotoResponse) {}
+
+    //Conversation
+    rpc StartConversation(StartConversationRequest) returns (StartConversationResponse){}
+    //get all messages from a conversation
+    rpc GetMessages(GetMessagesRequest) returns (GetMessagesResponse) {}
+    rpc GetConversations(ConversationsRequest) returns (ConversationsResponse){}
+    rpc SendTextMessage(SendTextMessageRequest) returns (SentMessageResponse) {}
+    rpc SendPhotoMessage(SendPhotoMessageRequest) returns (Response){}
+    rpc DeleteConversation(DeleteConversationRequest) returns (Response){}
+
+    //Board
+    rpc GetBoards(BoardsRequest) returns (BoardsResponse){}
+    rpc CreateMyBoard(CreateBoardRequest) returns (Response) {}
+    rpc DeleteMyBoard(DeleteMyBoardRequest) returns (Response) {}
+
+    //Report
+    rpc CreateReport(ReportRequest) returns (Response) {}
+
+}
